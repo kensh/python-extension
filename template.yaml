@@ -1,0 +1,38 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  python-extension
+
+  Sample SAM Template for python-extension
+
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  PythonExtensionFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      CodeUri: src/
+      Handler: app.lambda_handler
+      Runtime: python3.8
+      Layers:
+      - !Ref PythonExtensionLayer
+
+  PythonExtensionLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      Description: PythonExtensionLayer description
+      ContentUri: 'layer/'
+      CompatibleRuntimes:
+        - python3.8
+    Metadata:
+      BuildMethod: makefile
+
+Outputs:
+  PythonExtensionFunction:
+    Description: "PythonExtensionFunction ARN"
+    Value: !GetAtt PythonExtensionFunction.Arn
+  PythonExtensionFunctionIamRole:
+    Description: "Implicit IAM Role created for PythonExtensionFunction"
+    Value: !GetAtt PythonExtensionFunctionRole.Arn

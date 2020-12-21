@@ -2,7 +2,8 @@ import json
 import subprocess
 
 def lambda_handler(event, context):
-    command(['ls','/opt/python'])
+    command(['ls','-la', '/opt/extensions'])
+    command(['ls','-la', '/opt/python-extension'])
 
     return {
         "statusCode": 200,

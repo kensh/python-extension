@@ -1,9 +1,12 @@
 import json
 import subprocess
+import time
 
 def lambda_handler(event, context):
-    command(['ls','-la', '/opt/extensions'])
-    command(['ls','-la', '/opt/python-extension'])
+    # command(['ls','-la', '/opt/extensions'])
+    # command(['ls','-la', '/opt/python-extension'])
+
+    time.sleep(2)
 
     return {
         "statusCode": 200,
